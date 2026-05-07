@@ -1,22 +1,20 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven 3.8.6' // Replace with your configured Maven name in Jenkins Tools
-    }
     stages {
         stage('Checkout') {
             steps {
+                // Manually tell Jenkins which repo to clone
                 git 'https://github.com'
             }
         }
-        stage('Build') {
+        stage('Compile') {
             steps {
-                sh 'mvn clean package' // Builds the JAR/WAR file
+                bat 'javac App.java' 
             }
         }
-        stage('Test') {
+        stage('Run') {
             steps {
-                sh 'mvn test' // Runs unit tests
+                bat 'java App'
             }
         }
     }
